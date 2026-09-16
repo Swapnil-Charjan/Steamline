@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               BigInt         @id @default(autoincrement()) @db.UnsignedBigInt
+  username         String         @unique @db.VarChar(64)
+  email            String         @unique @db.VarChar(255)
+  fullname         String         @db.VarChar(160)
+  passwordHash     String         @map("password_hash") @db.VarChar(255)
+  avatarUrl        String         @map("avatar_url") @db.VarChar(2048)
+  coverImageUrl    String?        @map("cover_image_url") @db.VarChar(2048)
+  refreshToken     String?        @map("refresh_token") @db.VarChar(1024)
+  subscribersCount Int            @default(0) @map("subscribers_count") @db.UnsignedInt
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+  videos           Video[]
+  subscriptions    Subscription[] @relation("Subscriber")
+  subscribers      Subscription[] @relation("Channel")
+  watchHistory     WatchHistory[]
+
+  @@index([createdAt(sort: Desc)])
+  @@map("users")
+}
+
+model Video {
+  id              BigInt         @id @default(autoincrement()) @db.UnsignedBigInt
+  ownerId         BigInt         @map("owner_id") @db.UnsignedBigInt
+  videoUrl        String         @map("video_url") @db.VarChar(2048)
+  thumbnailUrl    String         @map("thumbnail_url") @db.VarChar(2048)
+  title           String         @db.VarChar(255)
+  description     String         @db.Text
+  durationSeconds Int            @map("duration_seconds") @db.UnsignedInt
+  views           BigInt         @default(0) @db.UnsignedBigInt
+  isPublished     Boolean        @default(true) @map("is_published")
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+  owner           User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  watchHistory    WatchHistory[]
+
+  @@index([ownerId, createdAt(sort: Desc)])
+  @@index([isPublished, createdAt(sort: Desc)])
+  @@map("videos")
+}
+
+model Subscription {
+  subscriberId BigInt   @map("subscriber_id") @db.UnsignedBigInt
+  channelId    BigInt   @map("channel_id") @db.UnsignedBigInt
+  createdAt    DateTime @default(now()) @map("created_at")
+  subscriber   User     @relation("Subscriber", fields: [subscriberId], references: [id], onDelete: Cascade)
+  channel      User     @relation("Channel", fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@id([subscriberId, channelId])
+  @@index([channelId, createdAt(sort: Desc)])
+  @@map("subscriptions")
+}
+
+model WatchHistory {
+  userId    BigInt   @map("user_id") @db.UnsignedBigInt
+  videoId   BigInt   @map("video_id") @db.UnsignedBigInt
+  watchedAt DateTime @default(now()) @map("watched_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@id([userId, videoId])
+  @@index([userId, watchedAt(sort: Desc)])
+  @@map("watch_history")
+}

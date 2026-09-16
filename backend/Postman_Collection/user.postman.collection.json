@@ -1,0 +1,206 @@
+{
+    "info": {
+        "name": "User Routes API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Register User",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        { "key": "avatar", "type": "file" },
+                        { "key": "coverImage", "type": "file" }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/register",
+                    "host": ["{{base_url}}"],
+                    "path": ["register"]
+                }
+            }
+        },
+        {
+            "name": "Login User",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"email\": \"\",\n  \"password\": \"\"\n}",
+                    "options": { "raw": { "language": "json" } }
+                },
+                "url": {
+                    "raw": "{{base_url}}/login",
+                    "host": ["{{base_url}}"],
+                    "path": ["login"]
+                }
+            }
+        },
+        {
+            "name": "Logout User",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/logout",
+                    "host": ["{{base_url}}"],
+                    "path": ["logout"]
+                }
+            }
+        },
+        {
+            "name": "Refresh Token",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/refresh-token",
+                    "host": ["{{base_url}}"],
+                    "path": ["refresh-token"]
+                }
+            }
+        },
+        {
+            "name": "Change Password",
+            "request": {
+                "method": "POST",
+                "header": [
+                    { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"oldPassword\": \"\",\n  \"newPassword\": \"\"\n}",
+                    "options": { "raw": { "language": "json" } }
+                },
+                "url": {
+                    "raw": "{{base_url}}/change-password",
+                    "host": ["{{base_url}}"],
+                    "path": ["change-password"]
+                }
+            }
+        },
+        {
+            "name": "Get Current User",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/current-user",
+                    "host": ["{{base_url}}"],
+                    "path": ["current-user"]
+                }
+            }
+        },
+        {
+            "name": "Get All Users",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/all-users",
+                    "host": ["{{base_url}}"],
+                    "path": ["all-users"]
+                }
+            }
+        },
+        {
+            "name": "Update Account",
+            "request": {
+                "method": "PATCH",
+                "header": [
+                    { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"fullname\": \"\",\n  \"email\": \"\"\n}",
+                    "options": { "raw": { "language": "json" } }
+                },
+                "url": {
+                    "raw": "{{base_url}}/update-account",
+                    "host": ["{{base_url}}"],
+                    "path": ["update-account"]
+                }
+            }
+        },
+        {
+            "name": "Update Avatar",
+            "request": {
+                "method": "PATCH",
+                "header": [
+                    { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        { "key": "avatar", "type": "file" }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/update-avatar",
+                    "host": ["{{base_url}}"],
+                    "path": ["update-avatar"]
+                }
+            }
+        },
+        {
+            "name": "Update Cover Image",
+            "request": {
+                "method": "PATCH",
+                "header": [
+                    { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        { "key": "coverImage", "type": "file" }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/update-cover-image",
+                    "host": ["{{base_url}}"],
+                    "path": ["update-cover-image"]
+                }
+            }
+        },
+        {
+            "name": "Get User Channel Profile",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/c/:username",
+                    "host": ["{{base_url}}"],
+                    "path": ["c", ":username"]
+                }
+            }
+        },
+        {
+            "name": "Get Watch History",
+            "request": {
+                "method": "GET",
+                "header": [
+                    { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/watchHistory",
+                    "host": ["{{base_url}}"],
+                    "path": ["watchHistory"]
+                }
+            }
+        }
+    ]
+}

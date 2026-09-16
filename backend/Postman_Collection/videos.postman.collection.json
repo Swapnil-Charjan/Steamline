@@ -1,0 +1,141 @@
+{
+    "info": {
+        "name": "Videos Routes API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Upload Video",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        { "key": "videoFile", "type": "file" },
+                        { "key": "thumbnail", "type": "file" }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/uploadVideo",
+                    "host": ["{{base_url}}"],
+                    "path": ["uploadVideo"]
+                }
+            }
+        },
+        {
+            "name": "Get My Videos",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/my-videos",
+                    "host": ["{{base_url}}"],
+                    "path": ["my-videos"]
+                }
+            }
+        },
+        {
+            "name": "Get Video Details",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/getVideoDetails/:id",
+                    "host": ["{{base_url}}"],
+                    "path": ["getVideoDetails", ":id"]
+                }
+            }
+        },
+        {
+            "name": "Get User Videos (Channel)",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/channel/:userId/videos",
+                    "host": ["{{base_url}}"],
+                    "path": ["channel", ":userId", "videos"]
+                }
+            }
+        },
+        {
+            "name": "Get Watch History",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/watchHistory",
+                    "host": ["{{base_url}}"],
+                    "path": ["watchHistory"]
+                }
+            }
+        },
+        {
+            "name": "Subscribe Channel",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/subscribe/:channelId",
+                    "host": ["{{base_url}}"],
+                    "path": ["subscribe", ":channelId"]
+                }
+            }
+        },
+        {
+            "name": "Unsubscribe Channel",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/unsubscribe/:channelId",
+                    "host": ["{{base_url}}"],
+                    "path": ["unsubscribe", ":channelId"]
+                }
+            }
+        }
+    ]
+}
